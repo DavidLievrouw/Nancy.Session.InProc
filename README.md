@@ -87,9 +87,6 @@ public class Bootstrapper : DefaultNancyBootstrapper
 
 When navigating to a page without the session ID querystring parameter, a 302-FOUND response with a location header is sent back to the client. This location header redirects to the same location, but includes the session ID querystring parameter.
 
-### Sample
-I added a tiny sample project to the solution: Nancy.Demo.InProcSessions.
-
 ### Roll your own
 Currently, two session identification methods are implemented:
 - BySessionIdCookie
