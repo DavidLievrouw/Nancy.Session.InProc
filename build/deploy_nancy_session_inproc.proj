@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RootPath>$(MSBuildProjectDirectory)\..</RootPath>
+    <BuildDirectory>$(RootPath)\build</BuildDirectory>
+    <TargetDirectory>$(BuildDirectory)\target</TargetDirectory>
+	<SourceDirectory>$(RootPath)\src</SourceDirectory>
+	<Configuration Condition="'$(Configuration)'==''">Release</Configuration>
+	<BuildTargetDirectory>$(SourceDirectory)\Nancy.Session.InProc\bin\$(Configuration)</BuildTargetDirectory>
+	<DeploymentTargetDirectory>$(TargetDirectory)\Nancy.Session.InProc</DeploymentTargetDirectory>
+  </PropertyGroup>
+  
+  <Target Name="Deploy">
+    <MakeDir Directories="$(DeploymentTargetDirectory)" />
+	
+  	<CreateItem Include="
+	              $(BuildTargetDirectory)\**\*"
+				Exclude="">
+      <Output ItemName="DeploymentFiles" TaskParameter="Include"/>
+    </CreateItem>
+    <Copy DestinationFolder="$(DeploymentTargetDirectory)\%(RecursiveDir)" SourceFiles="@(DeploymentFiles)" />
+  </Target>
+</Project>

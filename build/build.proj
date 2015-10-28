@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RootPath>$(MSBuildProjectDirectory)\..</RootPath>
+    <SourceDirectory>$(RootPath)\src</SourceDirectory>
+    <PackagesDirectory>$(MSBuildProjectDirectory)\packages</PackagesDirectory>
+    <MSBuildCommunityTasksPath>$(PackagesDirectory)\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
+    <ExtensionTasksPath>$(PackagesDirectory)\MSBuild.Extension.Pack.1.6.0\build\net40\</ExtensionTasksPath>
+	<ProductName Condition="'$(ProductName)'==''">Nancy.Session.InProc</ProductName>
+  </PropertyGroup>
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
+  <Import Project="$(ExtensionTasksPath)\MSBuild.Extension.Pack.targets"/>
+
+  <PropertyGroup Condition="'$(BuildConfiguration)' == ''">
+    <BuildConfiguration>Release</BuildConfiguration>
+  </PropertyGroup>
+  
+  <Target Name="SetVisualStudioVersion">
+    <PropertyGroup>
+	  <VisualStudioVersion Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0')">12.0</VisualStudioVersion>
+	  <VisualStudioVersion Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v14.0')">14.0</VisualStudioVersion>
+	</PropertyGroup>
+	<Message Text="Using Visual Studio version '$(VisualStudioVersion)'." />
+  </Target>
+  
+  <Target Name="InitVersion">
+    <ReadLinesFromFile File="$(RootPath)\version.txt">
+      <Output TaskParameter="Lines" PropertyName="ProductVersionPrefix" />
+    </ReadLinesFromFile>
+    
+    <PropertyGroup>
+       <ProductVersion Condition="'$(ProductVersion)'==''">$(ProductVersionPrefix).0</ProductVersion>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="Build" DependsOnTargets="SetVisualStudioVersion;InitVersion">
+    <Time>
+      <Output TaskParameter="Year" PropertyName="Year" />
+    </Time>
+
+	<AssemblyInfo CodeLanguage="CS"
+                  OutputFile="$(SourceDirectory)\SharedAssemblyInfo.cs"
+				  AssemblyDescription="This .NET assembly is part of $(ProductName)."
+                  AssemblyConfiguration="$(BuildConfiguration)"
+                  AssemblyVersion="$(ProductVersion)"
+                  AssemblyFileVersion="$(ProductVersion)"
+                  AssemblyInformationalVersion="$(ProductVersion)"
+                  AssemblyCompany="David Lievrouw"
+				  AssemblyProduct="$(ProductName)"
+				  CLSCompliant="false"
+				  ComVisible="false"
+				  AssemblyDelaySign="false" />
+	
+    <MSBuild Projects="$(MSBuildProjectDirectory)\build_nancy_session_inproc.proj;"
+             Properties="Configuration=$(BuildConfiguration);ProductVersion=$(ProductVersion);VisualStudioVersion=$(VisualStudioVersion);"
+			 StopOnFirstFailure="true"
+			 Targets="Build"
+			 BuildInParallel="false"/>
+  </Target>
+</Project>

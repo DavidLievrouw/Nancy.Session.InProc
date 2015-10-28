@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RootPath>$(MSBuildProjectDirectory)\..</RootPath>
+    <PackagesPath>$(MSBuildProjectDirectory)\packages</PackagesPath>
+    <BuildDirectory>$(RootPath)\build</BuildDirectory>
+    <TargetDirectory>$(BuildDirectory)\target</TargetDirectory>
+    <DeploymentTargetDirectory>$(TargetDirectory)\NuGet</DeploymentTargetDirectory>
+    <NuGetExe Condition="$(NuGetExe) == ''">$(RootPath)\.nuget\nuget.exe</NuGetExe>
+    <MSBuildCommunityTasksPath>$(PackagesPath)\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
+  <Import Project="Utils.targets" />
+
+  <Target Name="InitVersion">
+    <ReadLinesFromFile File="$(RootPath)\version.txt">
+      <Output TaskParameter="Lines" PropertyName="PackageVersionPrefix" />
+    </ReadLinesFromFile>
+    
+    <PropertyGroup>
+       <PackageVersion Condition="'$(PackageVersion)'==''">$(PackageVersionPrefix).0</PackageVersion>
+       <IsPrerelease Condition="'$(IsPrerelease)'==''">false</IsPrerelease>
+       <PrereleaseName Condition="'$(PrereleaseName)'==''">beta</PrereleaseName>
+    </PropertyGroup>
+    
+    <GetVersionParts VersionNumber="$(PackageVersion)">
+      <Output TaskParameter="MajorVersion" PropertyName="Major" />
+      <Output TaskParameter="MinorVersion" PropertyName="Minor" />
+      <Output TaskParameter="BuildVersion" PropertyName="Build" />
+      <Output TaskParameter="RevisionVersion" PropertyName="Revision" />
+    </GetVersionParts>
+    
+    <PropertyGroup>
+       <NuSpecVersion>$(Major).$(Minor).$(Build)</NuSpecVersion>
+       <NuSpecVersion Condition="'$(IsPrerelease)'=='true'">$(Major).$(Minor).$(Build)-$(PrereleaseName)</NuSpecVersion>
+    </PropertyGroup>
+  </Target>
+  
+  <Target Name="InitPack">
+	<RemoveDir ContinueOnError="false"
+			   Directories="$(DeploymentTargetDirectory)"
+			   Condition="Exists('$(DeploymentTargetDirectory)')" />
+  </Target>
+  
+  <Target Name="Pack" DependsOnTargets="InitVersion;InitPack">
+    <XmlUpdate
+      Prefix="ns"
+      Namespace="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd"
+      XmlFileName="Nancy.Session.InProc.nuspec"
+      XPath="/package/metadata/version"
+      Value="$(NuSpecVersion)" />
+
+    <MakeDir ContinueOnError="false" Directories="$(DeploymentTargetDirectory)" Condition="!Exists('$(DeploymentTargetDirectory)')" />
+    <Exec Command='&quot;$(NuGetExe)&quot; pack &quot;$(MSBuildProjectDirectory)\Nancy.Session.InProc.nuspec&quot; -Version $(NuSpecVersion) -Symbols -NonInteractive -o &quot;$(DeploymentTargetDirectory)&quot;' />    
+  </Target>
+
+  <Target Name="Push" DependsOnTargets="InitVersion">
+    <Exec Command='$(NuGetExe) push $(DeploymentTargetDirectory)\Nancy.Session.InProc.$(NuSpecVersion).nupkg' />
+  </Target>
+</Project>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="UnitTest" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RootPath>$(MSBuildProjectDirectory)\..</RootPath>
+    <SourceDirectory>$(RootPath)\src</SourceDirectory>
+    <BuildDirectory>$(RootPath)\build</BuildDirectory>
+	<ResultsOutputPath>$(BuildDirectory)\log</ResultsOutputPath>
+    <PackagesPath>$(BuildDirectory)\packages</PackagesPath>
+	<Configuration Condition="'$(Configuration)'==''">Release</Configuration>
+    <MSBuildCommunityTasksPath>$(PackagesPath)\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
+	<XUnitPath>$(PackagesPath)\xunit.runners.1.9.2\tools</XUnitPath>
+	<VisualStudioVersion Condition="'$(VisualStudioVersion)'==''">14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
+  <UsingTask AssemblyFile="$(XUnitPath)\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
+
+  <Target Name="Build">
+    <MSBuild 
+      Projects="$(SourceDirectory)\Nancy.Session.InProc.Tests\Nancy.Session.InProc.Tests.csproj;"
+	  Targets="Build"
+      Properties="Configuration=$(Configuration);VisualStudioVersion=$(VisualStudioVersion)"
+      StopOnFirstFailure="true"
+      ContinueOnError="false"
+      BuildInParallel="false" />
+  </Target>
+  
+  <Target Name="UnitTestNET" DependsOnTargets="Build">
+    <CreateItem Include="
+	              $(SourceDirectory)\Nancy.Session.InProc.Tests\bin\$(Configuration)\Nancy.Session.InProc.Tests.dll;">
+      <Output TaskParameter="Include" ItemName="XUnitTestAssemblies" />
+    </CreateItem>
+    
+	<XUnit
+      Assemblies="@(XUnitTestAssemblies)"
+      Xml="$(ResultsOutputPath)\xunit-unittests.xml" />
+  </Target>
+  
+  <Target Name="UnitTest" DependsOnTargets="UnitTestNET" />
+</Project>

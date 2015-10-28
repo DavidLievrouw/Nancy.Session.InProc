@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RootPath>$(MSBuildProjectDirectory)\..</RootPath>
+    <BuildDirectory>$(RootPath)\build</BuildDirectory>
+    <TargetDirectory>$(BuildDirectory)\target</TargetDirectory>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(BuildConfiguration)' == ''">
+    <BuildConfiguration>Release</BuildConfiguration>
+  </PropertyGroup>
+  
+  <Target Name="InitDeploy">
+	<RemoveDir ContinueOnError="false"
+			   Directories="$(TargetDirectory)"
+			   Condition="Exists('$(TargetDirectory)')" />
+  </Target>
+
+  <Target Name="Deploy" DependsOnTargets="InitDeploy">
+    <MSBuild Projects="$(MSBuildProjectDirectory)\deploy_nancy_session_inproc.proj;"
+             Properties="Configuration=$(BuildConfiguration)"
+			 StopOnFirstFailure="true"
+			 Targets="Deploy"
+			 BuildInParallel="false"/>
+  </Target>
+</Project>

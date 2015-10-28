@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:ns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Nancy.Session.InProc</id>
+    <version>1.3.0</version>
+    <!-- The real version will be added by msbuild -->
+    <authors>David Lievrouw</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>In-process memory sessions for NancyFx.</description>
+    <summary>Nancy is a lightweight web framework for the .Net platform, inspired by Sinatra. Nancy aim at delivering a low ceremony approach to building light, fast web applications.</summary>
+    <language>en-US</language>
+    <copyright>David Lievrouw and contributors</copyright>
+    <iconUrl>http://nancyfx.org/nancy-nuget.png</iconUrl>
+    <licenseUrl>https://github.com/DavidLievrouw/Nancy.Session.InProc/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/DavidLievrouw/Nancy.Session.InProc</projectUrl>
+    <dependencies>
+      <dependency id="Nancy" version="1.3.0" />
+    </dependencies>
+    <tags>Nancy NancyFx Session In-Process Memory Cookie Cookieless</tags>
+  </metadata>
+  <files>
+    <file src="target\Nancy.Session.InProc\Nancy.Session.InProc.dll" target="lib\net40" />
+    <file src="target\Nancy.Session.InProc\Nancy.Session.InProc.pdb" target="lib\net40" />
+    <file src="target\Nancy.Session.InProc\Nancy.Session.InProc.XML" target="lib\net40" />
+    <file src="..\src\Nancy.Session.InProc\**\*.cs" target="src" />
+  </files>
+</package>
