@@ -14,7 +14,7 @@
     <MakeDir Directories="$(DeploymentTargetDirectory)" />
 	
   	<CreateItem Include="
-	              $(BuildTargetDirectory)\**\*"
+	              $(BuildTargetDirectory)\**\Nancy.Session.InProc.*"
 				Exclude="">
       <Output ItemName="DeploymentFiles" TaskParameter="Include"/>
     </CreateItem>

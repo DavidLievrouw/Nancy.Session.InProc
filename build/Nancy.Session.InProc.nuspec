@@ -2,8 +2,8 @@
 <package xmlns:ns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Nancy.Session.InProc</id>
-    <version>1.3.0</version>
     <!-- The real version will be added by msbuild -->
+    <version>1.4.0</version>
     <authors>David Lievrouw</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>In-process memory sessions for NancyFx.</description>
@@ -14,7 +14,7 @@
     <licenseUrl>https://github.com/DavidLievrouw/Nancy.Session.InProc/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/DavidLievrouw/Nancy.Session.InProc</projectUrl>
     <dependencies>
-      <dependency id="Nancy" version="1.3.0" />
+      <dependency id="Nancy" version="1.4.0" />
     </dependencies>
     <tags>Nancy NancyFx Session In-Process Memory Cookie Cookieless</tags>
   </metadata>
