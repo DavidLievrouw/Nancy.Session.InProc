@@ -92,6 +92,7 @@
     <Compile Include="InProcSessionsManagement\SessionId.cs" />
     <Compile Include="InProcSessionsManagement\SessionIdentificationData.cs" />
     <Compile Include="InProcSessionsManagement\SessionIdFactory.cs" />
+    <Compile Include="Properties\InternalsVisibleTo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
