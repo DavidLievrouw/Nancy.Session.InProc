@@ -2,6 +2,8 @@
 
 This package was developed in order to be able to work with in-process memory sessions. The current NancyFX version only works with cookie-based sessions.
 
+Inspired by the [Nancy.MemoryCacheBasedSessions](https://www.nuget.org/packages/Nancy.MemoryCacheBasedSessions/) repository by [Bernos](https://www.nuget.org/profiles/bernos).
+
 A couple of reasons for doing this:
 - Try keeping a non-serializable object in the session. This doesn't work using the standard NancyFx library. So I would like to keep it in memory, and only send a lightweight correlation ID around.
 - When working with larger objects, the cookie data gets quite large. And that's going over the wire with every request. 
@@ -141,5 +143,15 @@ And modify your bootstrapper:
     }
 ```
 
+### Remarks
+The session data is kept in-process. That causes issues when using load balancing environments. When subsequent requests are delivered to a different server, the session data is lost. When you want to use sessions in a load balancing environment, I recommend you use the default CookieBasedSessions from NancyFx. In this implementation, the session data is the responsability of the client.
+
+Sessions are widely considered an anti-pattern. While this might be true, there are a lot of legacy applications that heavily rely on session state. This package provides a more advanced session functionality, than the default implementation of NancyFx, in order to be able to still work with sessions. That's the reason why this functionality is not in the NancyFx repository: The use of session state is disencouraged.
+
 ### Contact
 Feel free to contact me. I would like some feedback on this.
+
+### Change log
+v1.4.0 - 2015-10-29
+- Initial release.
+- Dependent on NancyFx 1.4.0 stable.
