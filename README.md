@@ -17,7 +17,7 @@ A couple of reasons for doing this:
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
-            InProcSessions.Enable(pipelines);
+            pipelines.EnableInProcSessions();
         }
     }
 ```
@@ -48,7 +48,7 @@ This command enables the in-process sessions, using the default configuration op
                     Path = "/schedule/"
                 }
             };
-            InProcSessions.Enable(pipelines, sessionConfig);
+            pipelines.EnableInProcSessions(sessionConfig);
         }
     }
 ```
@@ -80,7 +80,7 @@ public class Bootstrapper : DefaultNancyBootstrapper
             {
                 SessionIdentificationMethod = new ByQueryStringParamIdentificationMethod(CryptographyConfiguration.Default)
             };
-            InProcSessions.Enable(pipelines, sessionConfig);
+            pipelines.EnableInProcSessions(sessionConfig);
 
             base.ApplicationStartup(container, pipelines);
         }
@@ -136,7 +136,7 @@ And modify your bootstrapper:
             {
                 SessionIdentificationMethod = new MySessionIdentificationMethod()
             };
-            InProcSessions.Enable(pipelines, sessionConfig);
+            pipelines.EnableInProcSessions(sessionConfig);
 
             base.ApplicationStartup(container, pipelines);
         }
