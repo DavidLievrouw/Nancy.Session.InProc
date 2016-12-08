@@ -30,19 +30,19 @@
     [Fact]
     public void Given_null_config_then_throws() {
       var hooks = A.Fake<IPipelines>();
-      Assert.Throws<ArgumentNullException>(() => hooks.Enable((InProcSessionsConfiguration) null));
+      Assert.Throws<ArgumentNullException>(() => hooks.EnableInProcSessions(null));
     }
 
     [Fact]
     public void Given_invalid_config_then_throws() {
       var hooks = A.Fake<IPipelines>();
       var invalidConfiguration = new InProcSessionsConfiguration {SessionIdentificationMethod = null, SessionTimeout = TimeSpan.FromSeconds(-5)};
-      Assert.Throws<ArgumentException>(() => hooks.Enable(invalidConfiguration));
+      Assert.Throws<ArgumentException>(() => hooks.EnableInProcSessions(invalidConfiguration));
     }
 
     [Fact]
     public void Given_null_pipelines_then_throws() {
-      Assert.Throws<ArgumentNullException>(() => InProcSessions.Enable(null));
+      Assert.Throws<ArgumentNullException>(() => InProcSessions.EnableInProcSessions(null));
     }
   }
 }

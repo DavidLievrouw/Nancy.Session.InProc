@@ -16,7 +16,7 @@ namespace Demo.InProcSessions {
         CacheTrimInterval = TimeSpan.FromMinutes(10),
         SessionIdentificationMethod = new ByQueryStringParamIdentificationMethod(CryptographyConfiguration.Default)
       };
-      InProcSessions.Enable(pipelines, sessionConfig);
+      pipelines.EnableInProcSessions(sessionConfig);
 
       base.ApplicationStartup(container, pipelines);
     }

@@ -13,8 +13,9 @@
     ///   Initialise and add in-process memory based session hooks to the application pipeline with the default configuration.
     /// </summary>
     /// <param name="pipelines">Application pipelines</param>
+    [Obsolete("Please use the EnableInProcSessions extension method.")]
     public static void Enable(this IPipelines pipelines) {
-      Enable(pipelines, InProcSessionsConfiguration.Default);
+      EnableInProcSessions(pipelines);
     }
 
     /// <summary>
@@ -22,7 +23,25 @@
     /// </summary>
     /// <param name="pipelines">Application pipelines</param>
     /// <param name="configuration">In-process memory based sessions configuration.</param>
+    [Obsolete("Please use the EnableInProcSessions extension method.")]
     public static void Enable(this IPipelines pipelines, InProcSessionsConfiguration configuration) {
+      EnableInProcSessions(pipelines, configuration);
+    }
+
+    /// <summary>
+    ///   Initialise and add in-process memory based session hooks to the application pipeline with the default configuration.
+    /// </summary>
+    /// <param name="pipelines">Application pipelines</param>
+    public static void EnableInProcSessions(this IPipelines pipelines) {
+      EnableInProcSessions(pipelines, InProcSessionsConfiguration.Default);
+    }
+
+    /// <summary>
+    ///   Initialise and add in-process memory based session hooks to the application pipeline
+    /// </summary>
+    /// <param name="pipelines">Application pipelines</param>
+    /// <param name="configuration">In-process memory based sessions configuration.</param>
+    public static void EnableInProcSessions(this IPipelines pipelines, InProcSessionsConfiguration configuration) {
       if (configuration == null) throw new ArgumentNullException("configuration");
       if (!configuration.IsValid) throw new ArgumentException("Configuration is invalid", "configuration");
 
@@ -36,7 +55,7 @@
 
       Enable(pipelines, sessionManager);
     }
-
+    
     internal static void Enable(this IPipelines pipelines, IInProcSessionManager sessionManager) {
       if (pipelines == null) throw new ArgumentNullException("pipelines");
       if (sessionManager == null) throw new ArgumentNullException("sessionManager");
