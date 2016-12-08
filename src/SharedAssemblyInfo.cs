@@ -10,9 +10,9 @@
 
 [assembly: System.Reflection.AssemblyDescription("This .NET assembly is part of Nancy.Session.InProc.")]
 [assembly: System.Reflection.AssemblyConfiguration("Release")]
-[assembly: System.Reflection.AssemblyVersion("1.4.0.0")]
-[assembly: System.Reflection.AssemblyFileVersion("1.4.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersion("1.4.0.0")]
+[assembly: System.Reflection.AssemblyVersion("1.4.3.0")]
+[assembly: System.Reflection.AssemblyFileVersion("1.4.3.0")]
+[assembly: System.Reflection.AssemblyInformationalVersion("1.4.3.0")]
 [assembly: System.Reflection.AssemblyCompany("David Lievrouw")]
 [assembly: System.Reflection.AssemblyProduct("Nancy.Session.InProc")]
 [assembly: System.CLSCompliant(false)]
