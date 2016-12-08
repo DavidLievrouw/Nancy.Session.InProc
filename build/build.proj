@@ -4,8 +4,8 @@
     <RootPath>$(MSBuildProjectDirectory)\..</RootPath>
     <SourceDirectory>$(RootPath)\src</SourceDirectory>
     <PackagesDirectory>$(MSBuildProjectDirectory)\packages</PackagesDirectory>
-    <MSBuildCommunityTasksPath>$(PackagesDirectory)\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
-    <ExtensionTasksPath>$(PackagesDirectory)\MSBuild.Extension.Pack.1.6.0\build\net40\</ExtensionTasksPath>
+    <MSBuildCommunityTasksPath>$(PackagesDirectory)\MSBuildTasks.1.5.0.214\tools</MSBuildCommunityTasksPath>
+    <ExtensionTasksPath>$(PackagesDirectory)\MSBuild.Extension.Pack.1.8.0\build\net40\</ExtensionTasksPath>
 	<ProductName Condition="'$(ProductName)'==''">Nancy.Session.InProc</ProductName>
   </PropertyGroup>
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>

@@ -7,7 +7,7 @@
     <TargetDirectory>$(BuildDirectory)\target</TargetDirectory>
     <DeploymentTargetDirectory>$(TargetDirectory)\NuGet</DeploymentTargetDirectory>
     <NuGetExe Condition="$(NuGetExe) == ''">$(RootPath)\.nuget\nuget.exe</NuGetExe>
-    <MSBuildCommunityTasksPath>$(PackagesPath)\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
+    <MSBuildCommunityTasksPath>$(PackagesPath)\MSBuildTasks.1.5.0.214\tools</MSBuildCommunityTasksPath>
   </PropertyGroup>
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
   <Import Project="Utils.targets" />

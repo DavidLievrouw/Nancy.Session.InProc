@@ -7,7 +7,7 @@
 	<ResultsOutputPath>$(BuildDirectory)\log</ResultsOutputPath>
     <PackagesPath>$(BuildDirectory)\packages</PackagesPath>
 	<Configuration Condition="'$(Configuration)'==''">Release</Configuration>
-    <MSBuildCommunityTasksPath>$(PackagesPath)\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
+    <MSBuildCommunityTasksPath>$(PackagesPath)\MSBuildTasks.1.5.0.214\tools</MSBuildCommunityTasksPath>
 	<XUnitPath>$(PackagesPath)\xunit.runners.1.9.2\tools</XUnitPath>
 	<VisualStudioVersion Condition="'$(VisualStudioVersion)'==''">14.0</VisualStudioVersion>
   </PropertyGroup>

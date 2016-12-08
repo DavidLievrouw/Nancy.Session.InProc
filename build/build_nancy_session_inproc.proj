@@ -4,7 +4,7 @@
     <RootPath>$(MSBuildProjectDirectory)\..</RootPath>
     <SourceDirectory>$(RootPath)\src</SourceDirectory>
     <PackagesDirectory>$(MSBuildProjectDirectory)\packages</PackagesDirectory>
-	<MSBuildCommunityTasksPath>$(PackagesDirectory)\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
+	<MSBuildCommunityTasksPath>$(PackagesDirectory)\MSBuildTasks.1.5.0.214\tools</MSBuildCommunityTasksPath>
 	<Configuration Condition="'$(Configuration)'==''">Release</Configuration>
 	<ProductVersion>1.0.0</ProductVersion>
 	<BuildTargetDirectory>$(SourceDirectory)\Nancy.Session.InProc\bin\$(Configuration)</BuildTargetDirectory>
