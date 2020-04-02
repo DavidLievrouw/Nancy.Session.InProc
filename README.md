@@ -148,10 +148,8 @@ The session data is kept in-process. That causes issues when using load balancin
 
 Sessions are widely considered an anti-pattern. While this might be true, there are a lot of legacy applications that heavily rely on session state. This package provides a more advanced session functionality, than the default implementation of NancyFx, in order to be able to still work with sessions. That's the reason why this functionality is not in the NancyFx repository: The use of session state is disencouraged.
 
-### Contact
-Feel free to contact me. I would like some feedback on this.
+## Support
 
-### Change log
-v1.4.0 - 2015-10-29
-- Initial release.
-- Dependent on NancyFx 1.4.0 stable.
+If you've got value from any of the content which I have created, but pull requests are not your thing, then I would also very much appreciate your support by buying me a coffee.
+
+<a href="https://www.buymeacoffee.com/DavidLievrouw" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
